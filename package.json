@@ -67,9 +67,6 @@
   ],
   "license": "MIT",
   "main": "index.js",
-  "optionalDependencies": {
-    "preview-email": "*"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/forwardemail/email-templates"
