@@ -2,12 +2,10 @@ const process = require('process');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
-const I18N = require('@ladjs/i18n');
 const _ = require('lodash');
 const consolidate = require('@ladjs/consolidate');
 const getPaths = require('get-paths');
 const { convert } = require('html-to-text');
-const juice = require('juice');
 const nodemailer = require('nodemailer');
 
 let previewEmail;
@@ -20,6 +18,7 @@ const debug = util.debuglog('email-templates');
 
 // promise version of `juice.juiceResources`
 const juiceResources = (html, options) => {
+  const juice = require('juice');
   return new Promise((resolve, reject) => {
     juice.juiceResources(html, options, (err, html) => {
       if (err) return reject(err);
@@ -235,6 +234,8 @@ class Email {
         throw new Error(
           `The 'lastLocaleField' (String) option for @ladjs/i18n and email-templates do not match, i18n value was ${this.config.i18n.lastLocaleField} and email-templates value was ${this.config.lastLocaleField}`
         );
+
+      const I18N = require('@ladjs/i18n');
 
       const i18n = new I18N({ ...this.config.i18n, register: locals });
 
